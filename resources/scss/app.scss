@@ -1,0 +1,345 @@
+@import '~bootstrap/scss/bootstrap';
+
+// APP
+  .dark-mode {
+    background-color: #282936;
+    color: white;
+  }
+
+// 
+
+
+
+// DASHBOARD 
+
+#dashboard-container {
+    display: flex;
+
+    height: 400px;
+    margin:  50px auto;
+    padding: 20px;
+
+    text-align: center;
+
+    #dashboard-menu {
+        width: 60%;
+
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    #dashboard-contacts {
+        #contact {
+            display: none;
+        }
+    }
+
+    #skills-container, #dashboard-contacts  {
+        width: 20%;
+
+        .skill {
+            display: none;
+            font-size: 1.2em;
+            font-family:'Courier New', Courier, monospace;
+
+            &#html-skill {
+                color: rgba(255, 166, 0, 0.781);
+            }
+
+            &#javascript-skill {
+                color: rgba(255, 68, 0, 0.731);
+            }
+
+            &#vue-skill {
+                color: rgba(63, 137, 60, 0.562);
+            }
+
+            &#php-skill {
+                color: rgba(89, 106, 189, 0.562);
+            }
+
+            &#mysql-skill {
+                color: rgba(236, 220, 102, 0.753);
+            }
+
+            &#laravel-skill {
+                color: rgba(146, 64, 132, 0.562);
+            }
+        }
+    }
+
+    #projects-link {
+        text-decoration: none;
+    }
+}
+
+#dashboard-main-container {
+  width: 100%;
+  height: 500px;
+
+  background-color: #eef0f2;
+
+  #autobiography-container {
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 20px;
+
+    #autobiography-descript {
+      width: 60%;
+      height: 90%;
+
+      padding: 20px;
+      background: white;
+    }
+
+    #autobiography-photo  {
+      width: 300px;
+      height: 300px;
+      align-self: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+    }
+  }
+}
+
+
+
+.project-details {
+    width: 60%;
+    min-height: 400px;
+
+    padding: 50px;
+
+    border: 1px solid rgba(0, 0, 0, 0.21);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.45);
+}
+
+#edit-buttons-container {
+    display: flex;
+    justify-content: space-between;
+
+    #delete-button {
+        border: none;
+    }
+}
+
+#main-content {
+  display: flex;
+  
+  #aside {
+    width: 200px;
+    border-right: 1px solid rgba(0, 0, 0, 0.274);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// LAYOUT AND ANIMATIONS
+
+// dashboard-buttons
+
+.dashboard-button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+   }
+   
+   .dashboard-button.learn-more {
+    width: 12rem;
+    height: auto;
+   }
+   
+   .dashboard-button.learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #282936;
+    border-radius: 1.625rem;
+   }
+   
+   .dashboard-button.learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+   }
+   
+   .dashboard-button.learn-more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+   }
+   
+   .dashboard-button.learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+   }
+   
+   .dashboard-button.learn-more .button-text a {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #282936;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+   }
+   
+   .dashboard-button:hover .circle {
+    width: 100%;
+   }
+   
+   .dashboard-button:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+   }
+   
+   .dashboard-button:hover .button-text a {
+    color: #fff;
+   }
+
+//    ////
+
+
+// dark mode 
+.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 25px;
+    --light: #d8dbe0;
+    --dark: #28292c;
+    --link: rgb(27, 129, 112);
+    --link-hover: rgb(24, 94, 82);
+  }
+  
+  .switch-label {
+    position: absolute;
+    width: 100%;
+    height: 25px;
+    background-color: var(--dark);
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid var(--dark);
+  }
+  
+  .checkbox {
+    position: absolute;
+    display: none;
+  }
+  
+  .slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+  
+  .checkbox:checked ~ .slider {
+    background-color: var(--light);
+  }
+  
+  .slider::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    -webkit-box-shadow: inset 6px -2px 0px 0px var(--light);
+    box-shadow: inset 6px -2px 0px 0px var(--light);
+    background-color: var(--dark);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+  
+  .checkbox:checked ~ .slider::before {
+    -webkit-transform: translateX(25px);
+    -ms-transform: translateX(25px);
+    transform: translateX(25px);
+    background-color: var(--dark);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  
+//   ////
