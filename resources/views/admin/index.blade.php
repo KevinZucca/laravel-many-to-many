@@ -31,7 +31,7 @@
                 {{$singleProject->languages}}
               </td>
               <td>
-                {{$singleProject->name}}
+                {{$singleProject->type?->name}}
               </td>
               <td>
                 <a href="{{route('admin.projects.show', $singleProject->id)}}"><i class="fa-regular fa-file"></i></a>

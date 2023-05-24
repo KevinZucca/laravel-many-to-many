@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -31,7 +32,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin/create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin/create', compact('types', 'technologies'));
     }
 
     /**
@@ -51,11 +53,14 @@ class ProjectController extends Controller
         $project->name = $formData['name'];
         $project->description = $formData['description'];
         $project->github_link = $formData['github_link'];
-        $project->languages = $formData['languages'];
         $project->slug = Str::slug($formData['name'], '-');
         $project->type_id = $formData['type_id'];
 
         $project->save();
+
+        if (array_key_exists('technologies', $formData)) {
+            $project->technologies()->attach($formData['technologies']);
+        };
 
         return  redirect()->route('admin.projects.show', $project);
     }
@@ -82,7 +87,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin/edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin/edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -99,6 +105,12 @@ class ProjectController extends Controller
         $formData = $request->all();
         $project->update($formData);
         $project->save();
+
+        if (array_key_exists('technologies', $formData)) {
+            $project->technologies()->sync($formData['technologies']);
+        } else {
+            $project->technologies()->detach();
+        };
 
         return redirect()->route('admin.projects.show', $project->id);
     }
@@ -122,13 +134,11 @@ class ProjectController extends Controller
             'name' => 'required|max:100',
             'description' => 'required|max:255',
             'github_link' => 'required|max:255',
-            'languages' => 'required|max:100',
             'type_id' => 'nullable|exists:types,id'
         ], [
             'name.required' => 'Devi inserire il titolo',
             'description.required' => 'Inserisci una breve descrizione',
             'github_link.required' => "E' necessario allegare il link di github",
-            'languages.required' => 'Inserire almeno un linguaggio di quelli utilizzati',
             'type_id.exists' => "E' necessario inserire la tipologia"
         ])->validate();
 

@@ -27,10 +27,15 @@
           </select> 
       </div>
 
-        <div class="form-group mt-3">
-            <label for="languages">Linguaggi di programmazione</label>
-            <input type="text" name="languages" class="form-control" id="formGroupExampleInput2" placeholder="Inserisci i linguaggi che hai utilizzato" value="" required>
-        </div>
+
+      <div class="form-group mt-3 checkbox-container">
+        @foreach ($technologies as $technology)
+          <label for="{{$technology->id}}">{{$technology->name}}</label>
+          <input id="{{$technology->id}}" type="checkbox" name="technologies[]" value="{{$technology->id}}">
+        @endforeach
+      </div>
+
+       
         
         <div class="form-group mt-3">
             <label for="github_link">Link di Github</label>

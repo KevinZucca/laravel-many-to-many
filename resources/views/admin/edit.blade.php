@@ -41,15 +41,11 @@
             </select> 
         </div>
 
-        <div class="form-group mt-3">
-            <label for="languages">Linguaggi di programmazione</label>
-            <input type="text" name="languages" class="form-control @error ('languages') is-invalid @enderror" id="formGroupExampleInput2" placeholder="Inserisci i linguaggi che hai utilizzato" value="{{old('languages') ? : $project->languages}}">
-            @error('languages')
-
-            <div class="invalid-feedback">
-                {{$message}}
-            </div>
-            @enderror
+        <div class="form-check mt-3 checkbox-container">
+            @foreach ($technologies as $technology)
+              <label for="{{$technology->id}}">{{$technology->name}}</label>
+              <input id="{{$technology->id}}" type="checkbox" name="technologies[]" value="{{$technology->id}}" @checked($project->technologies->contains($technology))>
+            @endforeach
         </div>
         
         <div class="form-group mt-3">
