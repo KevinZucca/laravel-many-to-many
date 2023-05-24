@@ -45,7 +45,7 @@
                     <a href="{{route('admin.projects.index')}}">Progetti</a>
                     <a href="{{route('admin.projects.create')}}">Aggiungi un progetto</a>
                     <a href="{{route('admin.types.index')}}">Tipologie</a>
-                    <a href="#">Tecnologie</a>
+                    <a href="{{route('admin.technologies.index')}}">Tecnologie</a>
                  </div>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">

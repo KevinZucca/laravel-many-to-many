@@ -10,7 +10,7 @@
         <em>Tecnologie utilizzate:  
           <strong> 
             @foreach ($project->technologies as $technology)
-              {{ $technology->name}}
+              {{$technology->name}}
             @endforeach
           </strong> 
         </em>
