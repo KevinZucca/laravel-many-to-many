@@ -4,6 +4,7 @@
 
   <div class="container text-center mt-5">
       <div class="container project-details">
+        <img src="{{asset('storage/' . $project->img)}}" alt="{{$project->img ? 'project-img' : ''}}">
         <h1>{{$project->name}}</h1>
         <h5>Tipo di progetto: {{$project->type->name ?? 'nessun tipo'}}</h5>
         <p>{{$project->description}}</p>

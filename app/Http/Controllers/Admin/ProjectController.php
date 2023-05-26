@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Symfony\Component\Mime\Part\Multipart\FormDataPart;
@@ -50,17 +51,19 @@ class ProjectController extends Controller
 
         $project = new Project();
 
-        $project->name = $formData['name'];
-        $project->description = $formData['description'];
-        $project->github_link = $formData['github_link'];
+        if ($request->hasFile('img')) {
+            $path = Storage::put('project_images', $request->img);
+            $formData['img'] = $path;
+        }
+
+        $project->fill($formData);
         $project->slug = Str::slug($formData['name'], '-');
-        $project->type_id = $formData['type_id'];
 
         $project->save();
 
         if (array_key_exists('technologies', $formData)) {
             $project->technologies()->attach($formData['technologies']);
-        };
+        }
 
         return  redirect()->route('admin.projects.show', $project);
     }
@@ -104,15 +107,23 @@ class ProjectController extends Controller
         $this->validation($request);
 
         $formData = $request->all();
-        $project->update($formData);
-        $project->save();
 
         if (array_key_exists('technologies', $formData)) {
             $project->technologies()->sync($formData['technologies']);
         } else {
             $project->technologies()->detach();
-        };
+        }
 
+        if ($request->hasFile('img')) {
+            if ($project->img) {
+                Storage::delete($project->img);
+            }
+            $path = Storage::put('project_images', $request->img);
+            $formData['img'] = $path;
+        }
+
+        $project->update($formData);
+        $project->save();
         return redirect()->route('admin.projects.show', $project->id);
     }
 
@@ -124,6 +135,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->img) {
+            Storage::delete($project->img);
+        }
+
         $project->delete();
         return redirect()->route('admin.projects.index');
     }
@@ -135,12 +150,15 @@ class ProjectController extends Controller
             'name' => 'required|max:100',
             'description' => 'required|max:255',
             'github_link' => 'required|max:255',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'img' => 'nullable|image|max:4024'
         ], [
             'name.required' => 'Devi inserire il titolo',
             'description.required' => 'Inserisci una breve descrizione',
             'github_link.required' => "E' necessario allegare il link di github",
-            'type_id.exists' => "E' necessario inserire la tipologia"
+            'type_id.exists' => "E' necessario inserire la tipologia",
+            'img.max' => "L'immagine deve avere meno di 4mb",
+            'img.image' => "Formato dell'immagine non leggibile"
         ])->validate();
 
         return $validator;

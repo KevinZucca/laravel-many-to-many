@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class Project extends Model
 {
-    protected $fillable = ['name', 'description', 'github_link', 'languages', 'slug', 'type_id'];
+    protected $fillable = ['name', 'description', 'github_link', 'languages', 'slug', 'type_id', 'img'];
     use HasFactory;
 
     public function type()

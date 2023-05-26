@@ -4,13 +4,24 @@
 
 
 <div class="container mt-5">
-    <form action="{{route('admin.projects.update', $project->id)}}" method="POST">
+    <form action="{{route('admin.projects.update', $project->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group mt-3">
           <label for="title">Nome progetto</label>
           <input type="text" name="name" class="form-control @error ('name') is-invalid @enderror" id="formGroupExampleInput" placeholder="Inserisci il nome del tuo progetto" value="{{old('name') ? : $project->name}}">
           @error('name')
+
+          <div class="invalid-feedback">
+            {{$message}}
+          </div>
+          @enderror
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="title">Immagine</label>
+          <input type="file" name="img" class="form-control @error ('img') is-invalid @enderror" id="img" placeholder="Inserisci un'immagine" value="{{old('img') ? : $project->img}}">
+          @error('img')
 
           <div class="invalid-feedback">
             {{$message}}

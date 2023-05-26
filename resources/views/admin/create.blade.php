@@ -3,11 +3,16 @@
 @section('content')
 
 <div class="container mt-5">
-    <form action="{{route('admin.projects.store')}}" method="POST">
+    <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group mt-3">
           <label for="title">Nome progetto</label>
           <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Inserisci il nome del tuo progetto" value="" required>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="img">Immagine</label>
+          <input type="file" name="img" class="form-control" id="img" placeholder="Inserisci un'immagine" value="">
         </div>
 
         <div class="form-group mt-3">
