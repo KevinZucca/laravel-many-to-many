@@ -9,8 +9,8 @@
             <th scope="col">Nome progetto</th>
             <th scope="col">Descrizione</th>
             <th scope="col">Link a Github</th>
-            <th scope="col">Linguaggi utilizzati</th>
             <th scope="col">Tipologia</th>
+            <th scope="col">Tecnologie utilizzate</th>
             <th scope="col">Dettagli</th>
           </tr>
         </thead>
@@ -28,15 +28,21 @@
                 {{$singleProject->github_link}}
               </td>
               <td>
-                {{$singleProject->languages}}
+                {{$singleProject->type?->name}}
               </td>
               <td>
-                {{$singleProject->type?->name}}
+                @php
+                  $techNames = [];
+                  foreach($singleProject->technologies as $tech){
+                    $techNames[] = $tech->name;
+                  }
+                  echo implode(', ', $techNames);
+                @endphp
               </td>
               <td>
                 <a href="{{route('admin.projects.show', $singleProject->id)}}"><i class="fa-regular fa-file"></i></a>
               </td>
-            </tr>
+  
             @endforeach
         
         </tbody>

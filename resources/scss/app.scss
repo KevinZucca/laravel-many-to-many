@@ -5,7 +5,6 @@
     background-color: #282936;
     color: white;
   }
-
 // 
 
 
@@ -148,6 +147,14 @@
   display: flex;
   flex-flow: column;
 }
+
+#project-image {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+
 
 
 

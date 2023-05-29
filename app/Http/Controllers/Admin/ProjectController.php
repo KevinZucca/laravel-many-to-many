@@ -22,7 +22,8 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('admin/index', compact('projects'));
+        $technologies = Technology::all();
+        return view('admin/index', compact('projects', 'technologies'));
     }
 
     /**
@@ -151,7 +152,7 @@ class ProjectController extends Controller
             'description' => 'required|max:255',
             'github_link' => 'required|max:255',
             'type_id' => 'nullable|exists:types,id',
-            'img' => 'nullable|image|max:4024'
+            'img' => 'nullable|image|max:4024',
         ], [
             'name.required' => 'Devi inserire il titolo',
             'description.required' => 'Inserisci una breve descrizione',
